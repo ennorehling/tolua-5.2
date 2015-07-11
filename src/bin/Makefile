@@ -17,13 +17,13 @@ T_D = $(TOLUA)/bin/tolua_lua
 all: $(T)
 
 $(T): $(OBJS)
-	$(CC) -o $@ $(OBJS) $(LIB) -ltolua -l$(LUA) -lm
+	$(CC) -o $@ $(OBJS) $(LIB) -ltolua -l$(LUA) -lm -Wl,--no-as-needed -ldl
 
 toluabind.c: $(T_D)
 	$(T_D) -o toluabind.c tolua.pkg
 
 $(T_D): $(OBJS_D)
-	$(CC) -o $@ $(OBJS_D) $(LIB) -ltolua -l$(LUA) -lm
+	$(CC) -o $@ $(OBJS_D) $(LIB) -ltolua -l$(LUA) -lm -Wl,--no-as-needed -ldl
 
 tolua_lua.o: tolua.c
 	$(CC) -c -DLUA_SOURCE $(INC) -o $@ $<

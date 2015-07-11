@@ -20,20 +20,23 @@ RANLIB= ranlib
 # this should work in all unix systems.
 AR= ar rcu
 
-# set lua path
-ifeq (/usr/include/lua5.2,$(wildcard /usr/include/lua5.2))
+# defaults
+LUA=lua
+LUAINC=/usr/include/$(LUA)
+LUALIB=/usr/lib
+
+# ubuntu
+ifeq (/usr/include/lua5.2/lua.h,$(wildcard /usr/include/lua5.2/lua.h))
 LUA=lua5.2
 LUAINC=/usr/include/$(LUA)
 LUALIB=/usr/lib/x86_64-linux-gnu/
-else
+endif
+
+# lua installed in /opt
+ifeq (/opt/include/lua.h,$(wildcard /opt/include/lua.h))
 LUA=lua
 LUAINC=/opt/include
 LUALIB=/opt/lib
-endif
-
-ifeq (/lib/arm-linux-gnueabihf,$(wildcard /lib/arm-linux-gnueabihf))
-# Raspberry Pi: no support for long long
-CFLAGS+=-DLUA_32BITS
 endif
 
 # == END OF USER SETTINGS. DO NOT CHANGE ANYTHING BELOW THIS LINE ============
@@ -41,8 +44,15 @@ endif
 INC= -I$(TOLUA)/include -I$(LUAINC)
 LIB= -L$(TOLUA)/lib -L$(LUALIB)
 
-#CFLAGS= -O2 $(WARN) $(INC)
-#CPPFLAGS=  -O2 $(WARN) $(INC)
-CFLAGS= -g $(WARN) $(INC)
-CPPFLAGS=  -g $(WARN) $(INC)
+#CFLAGS= -O2
+CFLAGS= -g
+CPPFLAGS= $(CFLAGS)
+
+CFLAGS+= $(WARN) $(INC) 
+CPPFLAGS+= $(WARN) $(INC)
+
+ifeq (/lib/arm-linux-gnueabihf,$(wildcard /lib/arm-linux-gnueabihf))
+# Raspberry Pi: no support for long long
+CFLAGS+=-DLUA_32BITS -DLUA_C89_NUMBERS
+endif
 
