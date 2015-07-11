@@ -1,6 +1,7 @@
 # makefile for tolua hierarchy
 
 tolua:
+	mkdir -p lib
 	cd src/lib; make all
 	cd src/bin; make all
 
