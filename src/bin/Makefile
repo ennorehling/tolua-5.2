@@ -29,8 +29,8 @@ tolua_lua.o: tolua.c
 	$(CC) -c -DLUA_SOURCE $(INC) -o $@ $<
 
 clean:
-	rm -f tolua_lua.o $(OBJS) -$(OBJS_D) $(T) $(T_D)
+	rm -f tolua_lua.o $(OBJS) $(OBJS_D) $(T) $(T_D)
 
 klean:
-	rm -f tolua_lua.o $(OBJS) -$(OBJS_D) $(T_D)
+	rm -f tolua_lua.o $(OBJS) $(OBJS_D) $(T_D)
 
