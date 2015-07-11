@@ -5,7 +5,7 @@ TOLUAEXE = tolua
 
 include $(TOLUA)/config
 
-LIBS = -ltolua -llua
+LIBS = -ltolua -l$(LUA)
 
 EXE = tmodule tnamespace tclass tinheritance tconstant tvariable tfunction tarray tdirective tenum tvararg
 
