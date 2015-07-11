@@ -21,9 +21,20 @@ RANLIB= ranlib
 AR= ar rcu
 
 # set lua path
+ifeq (/usr/include/lua5.2,$(wildcard /usr/include/lua5.2))
 LUA=lua5.2
 LUAINC=/usr/include/$(LUA)
 LUALIB=/usr/lib/x86_64-linux-gnu/
+else
+LUA=lua
+LUAINC=/opt/include
+LUALIB=/opt/lib
+endif
+
+ifeq (/lib/arm-linux-gnueabihf,$(wildcard /lib/arm-linux-gnueabihf))
+# Raspberry Pi: no support for long long
+CFLAGS+=-DLUA_32BITS
+endif
 
 # == END OF USER SETTINGS. DO NOT CHANGE ANYTHING BELOW THIS LINE ============
 
@@ -34,3 +45,4 @@ LIB= -L$(TOLUA)/lib -L$(LUALIB)
 #CPPFLAGS=  -O2 $(WARN) $(INC)
 CFLAGS= -g $(WARN) $(INC)
 CPPFLAGS=  -g $(WARN) $(INC)
+
