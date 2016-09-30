@@ -1,0 +1,15 @@
+language: C
+sudo: false
+compiler:
+  - gcc
+  - clang
+script:
+  - make
+  - make tests
+addons:
+  apt:
+    packages:
+      - liblua5.2-dev
+os:
+  - linux
+  - osx

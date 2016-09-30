@@ -1,0 +1,65 @@
+# configuration file for making tolua
+
+# == CHANGE THE SETTINGS BELOW TO SUIT YOUR ENVIRONMENT ======================
+
+# you need an ANSI C compiler. gcc is a popular one.
+CC= gcc
+CCPP = g++
+WARN= -ansi -Wall -g
+
+# on SGI's, cc is ANSI.
+#CC= cc
+#WARN= -ansi -fullwarn
+
+# if your system doesn't have (or need) ranlib, change "ranlib" to "true".
+# on some systems, "ar s" does it.
+RANLIB= ranlib
+#RANLIB= ar s
+#RANLIB= true
+
+# this should work in all unix systems.
+AR= ar rcu
+
+# defaults
+LUA=lua
+LUAINC=/usr/include/$(LUA)
+LUALIB=/usr/lib
+
+# OSX & brew
+ifeq (/usr/local/include/lua.h,$(wildcard /usr/local/include/lua.h))
+LUA=lua
+LUAINC=/usr/local/include
+LUALIB=/usr/local/lib
+endif
+
+# ubuntu
+ifeq (/usr/include/lua5.2/lua.h,$(wildcard /usr/include/lua5.2/lua.h))
+LUA=lua5.2
+LUAINC=/usr/include/$(LUA)
+LUALIB=/usr/lib/x86_64-linux-gnu/
+endif
+
+# lua installed in /opt
+ifeq (/opt/include/lua.h,$(wildcard /opt/include/lua.h))
+LUA=lua
+LUAINC=/opt/include
+LUALIB=/opt/lib
+endif
+
+# == END OF USER SETTINGS. DO NOT CHANGE ANYTHING BELOW THIS LINE ============
+
+INC= -I$(TOLUA)/include -I$(LUAINC)
+LIB= -L$(TOLUA)/lib -L$(LUALIB)
+
+#CFLAGS= -O2
+CFLAGS= -g
+CPPFLAGS= $(CFLAGS)
+
+CFLAGS+= $(WARN) $(INC) 
+CPPFLAGS+= $(WARN) $(INC)
+
+ifeq (/lib/arm-linux-gnueabihf,$(wildcard /lib/arm-linux-gnueabihf))
+# Raspberry Pi: no support for long long
+CFLAGS+=-DLUA_32BITS -DLUA_C89_NUMBERS
+endif
+
