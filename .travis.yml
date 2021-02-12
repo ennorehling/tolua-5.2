@@ -7,6 +7,9 @@ script:
   - make
   - make tests
 addons:
+  homebrew:
+    packages:
+      - lua
   apt:
     packages:
       - liblua5.2-dev

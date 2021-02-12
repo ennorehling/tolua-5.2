@@ -76,8 +76,6 @@ tvarargbind.cpp: tvararg.pkg
 clean:
 	rm -f t*bind.* 
 	rm -f *.o 
-
-klean:
 	rm -f $(EXE)
 
 
