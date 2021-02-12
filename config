@@ -25,13 +25,6 @@ LUA=lua
 LUAINC=/usr/include/$(LUA)
 LUALIB=/usr/lib
 
-# OSX & brew
-ifeq (/usr/local/include/lua.h,$(wildcard /usr/local/include/lua.h))
-LUA=lua
-LUAINC=/usr/local/include
-LUALIB=/usr/local/lib
-endif
-
 # ubuntu
 ifeq (/usr/include/lua5.2/lua.h,$(wildcard /usr/include/lua5.2/lua.h))
 LUA=lua5.2
@@ -44,6 +37,13 @@ ifeq (/opt/include/lua.h,$(wildcard /opt/include/lua.h))
 LUA=lua
 LUAINC=/opt/include
 LUALIB=/opt/lib
+endif
+
+# OSX & brew
+ifeq (/usr/local/include/lua/lua.h,$(wildcard /usr/local/include/lua/lua.h))
+LUA=lua
+LUAINC=/usr/local/include/lua
+LUALIB=/usr/local/lib
 endif
 
 # == END OF USER SETTINGS. DO NOT CHANGE ANYTHING BELOW THIS LINE ============
