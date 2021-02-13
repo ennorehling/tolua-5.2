@@ -16,7 +16,7 @@
 
 /* Exported function */
 TOLUA_API int  tolua_tolua_open (lua_State* tolua_S);
-LUALIB_API int  luaopen_tolua (lua_State* tolua_S);
+int  luaopen_tolua (lua_State* tolua_S);
 
 
 /* function to register type */
@@ -25,7 +25,7 @@ static void tolua_reg_types (lua_State* tolua_S)
 }
 
 /* Open lib function */
-LUALIB_API int  luaopen_tolua (lua_State* tolua_S)
+int  luaopen_tolua (lua_State* tolua_S)
 {
  tolua_open(tolua_S);
  tolua_reg_types(tolua_S);
