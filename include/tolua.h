@@ -24,13 +24,13 @@
 # endif
 #endif
 
-#define TOLUA_VERSION "tolua 5.2.0"
+#define TOLUA_VERSION "tolua 5.2.4"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <lua.h>
+#include "lua.h"
 #include "lauxlib.h"
 
 struct tolua_Error
@@ -43,6 +43,8 @@ typedef struct tolua_Error tolua_Error;
 typedef char tolua_byte;
 typedef unsigned char tolua_ubyte;
 typedef int tolua_index;
+typedef int tolua_multret;
+typedef int tolua_len;
 typedef int lua_Object;
 
 #define tolua_own

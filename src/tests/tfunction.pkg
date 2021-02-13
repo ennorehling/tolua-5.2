@@ -37,7 +37,8 @@ class Point
 	bool operator<= (const Point& p) const;
 	bool operator== (const Point& p) const;
 
- float operator[] (int i) const;
+  tolua_len size () const;
+  float operator[] (int i) const;
 	float& operator[] (int i);
 
 	static Error echo (Error e);

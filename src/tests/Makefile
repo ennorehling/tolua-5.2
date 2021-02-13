@@ -5,12 +5,12 @@ TOLUAEXE = tolua
 
 include $(TOLUA)/config
 
-LIBS = -ltolua -l$(LUA) -lm -ldl
+LIBS = -ltolua -llua
 
-EXE = tmodule tnamespace tclass tinheritance tconstant tvariable tfunction tarray tdirective tenum tvararg
+EXE = tmodule tnamespace tclass tpeer tinheritance tconstant tvariable tfunction tarray tdirective tenum tvararg
 
 all: $(EXE)
-	./tmodule; ./tnamespace; ./tclass; ./tinheritance; ./tconstant; ./tvariable; ./tfunction; ./tarray; ./tdirective; ./tfunction; ./tenum; ./tvararg
+	./tmodule; ./tnamespace; ./tclass; ./tpeer; ./tinheritance; ./tconstant; ./tvariable; ./tfunction; ./tarray; ./tdirective; ./tfunction; ./tenum; ./tvararg
 
 tarray: tarray.o tarraybind.o
 	$(CC) $(CFLAGS) -o $@ tarray.o tarraybind.o $(TLIB) $(LIB) $(LIBS)
@@ -52,6 +52,11 @@ tclass:  tclass.o tclassbind.o
 tclassbind.cpp: tclass.pkg
 	$(TOLUA)/bin/$(TOLUAEXE) -o $@ $<
 
+tpeer:  tpeer.o tpeerbind.o
+	$(CCPP) $(CPPFLAGS) -o $@ tpeer.o tpeerbind.o $(TLIB) $(LIB) $(LIBS)
+tpeerbind.cpp: tpeer.pkg
+	$(TOLUA)/bin/$(TOLUAEXE) -o $@ $<
+
 tinheritance:  tinheritance.o tinheritancebind.o
 	$(CCPP) $(CPPFLAGS) -o $@ tinheritance.o tinheritancebind.o $(TLIB) $(LIB) $(LIBS)
 tinheritancebind.cpp: tinheritance.pkg
@@ -76,6 +81,8 @@ tvarargbind.cpp: tvararg.pkg
 clean:
 	rm -f t*bind.* 
 	rm -f *.o 
+
+klean:
 	rm -f $(EXE)
 
 

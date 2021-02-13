@@ -20,5 +20,8 @@ $T: $(OBJS)
 	$(RANLIB) $@
 
 clean:
-	rm -f $(OBJS) $T
+	rm -f $(OBJS) 
+	
+klean:
+	rm -f $T
 
