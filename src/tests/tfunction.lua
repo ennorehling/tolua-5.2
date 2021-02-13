@@ -76,7 +76,7 @@ assert(p[1]==1 and p[2]==2)
 p[1]=3; p[2] = p[2]+2
 local x, y = p:get()
 assert(x==3 and y==4)
-
+assert(#p==2)
 
 local n = 3
 local v = {Point:new(0,1), Point:new(2,3), Point:new(4,5)}

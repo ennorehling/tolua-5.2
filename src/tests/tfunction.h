@@ -109,7 +109,12 @@ public:
 		return m_x==p.m_x && m_y==p.m_y;
 	}
 
- float operator[] (int i) const
+  int size () const
+  {
+    return 2;
+  }
+
+  float operator[] (int i) const
 	{
 		return (i==0) ? m_x : m_y;
 	}
